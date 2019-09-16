@@ -160,7 +160,7 @@
   </form>
 </div>
 
-<canvas id="canvas">Ваш браузер не поддерживает некоторые технологии, используемые на этом сайте</canvas>
+
 
 <footer>
   <p><a href="http://htmlacademy.ru" class="footer-link"><img src="img/htmlacademy-logo.png" alt="HTML Academy"
@@ -187,11 +187,16 @@
   var wizardSpeed = 3;
   var wizardWidth = 70;
 
+  /**
+   * @description задает скорость полета файерболла
+   * @param {boolen} летит ли файерболл влево
+   * @return {number} возвращает скорость полета файерболла
+   */
   var getFireballSpeed = function(left) {
     if (left) {
       return 5;
     }
-      return 2;
+    return 2;
   };
 
   var getWizardHeight = function() {
@@ -199,10 +204,16 @@
     return wizardHeight;
   };
 
+  /**
+   * @description задает положение мага по горизонтали
+   */
   var getWizardX = function(width) {
     return width / 2 - wizardWidth / 2;
   };
 
+  /**
+   * @description задает положение мага по вертикали
+   */
   var getWizardY = function(height) {
     return height / 2 - getWizardHeight() / 2;
   };
