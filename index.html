@@ -160,6 +160,8 @@
   </form>
 </div>
 
+
+
 <footer>
   <p><a href="http://htmlacademy.ru" class="footer-link"><img src="img/htmlacademy-logo.png" alt="HTML Academy"
                                                               width="130">Сделано в HTML Academy</a>в 2017 году</p>
@@ -185,29 +187,37 @@
   var wizardSpeed = 3;
   var wizardWidth = 70;
 
+  /**
+   * @description задает скорость полета файерболла
+   * @param {boolen} летит ли файерболл влево
+   * @return {number} возвращает скорость полета файерболла
+   */
   var getFireballSpeed = function(left) {
     if (left) {
       return 5;
-    } else {
-      return 2;
     }
+    return 2;
   };
 
   var getWizardHeight = function() {
-    var wizardHeight = 1.337 * wizardWidth;
-    return wizardHeight;
+    return 1.337 * wizardWidth;
   };
 
+  /**
+   * @description задает положение мага по горизонтали
+   */
   var getWizardX = function(width) {
-    var wizardX = width / 2 - wizardWidth / 2;
-    return wizardX;
+    return width / 2 - wizardWidth / 2;
   };
 
+  /**
+   * @description задает положение мага по вертикали
+   */
   var getWizardY = function(height) {
-    var wizardY = height / 2 - getWizardHeight() / 2;
-    return wizardY;
+    return height / 2 - getWizardHeight() / 2;
   };
 </script>
+<script src="js/stat.js"></script>
 <script src="js/game.js"></script>
 
 </body>
