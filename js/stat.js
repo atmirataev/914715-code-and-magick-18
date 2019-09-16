@@ -1,11 +1,12 @@
 'use strict';
+
 var CLOUD_WIDTH = 420;
 var CLOUD_HEIGHT = 270;
 var CLOUD_X = 100;
 var CLOUD_Y = 10;
-var SHADOW_GAP = 10; // Тень облака на 10px смещена вниз и вправо
-var GAP = 20; // общий пробел
-var BAR_HEIGHT = 150;
+var SHADOW_GAP = 10; // Тень облака
+var GAP = 20; // общий отступ
+var BAR_HEIGHT = 150; // высота максимального столбца
 var BAR_WIDTH = 40;
 var BAR_MARGIN = 50; // ширина между столбцами
 
@@ -73,8 +74,8 @@ window.renderStatistics = function (ctx, names, times) {
       ctx.fillStyle = getRandomBlueColor();
     }
 
-    ctx.fillRect(CLOUD_X + BAR_MARGIN + (BAR_WIDTH + BAR_MARGIN) * i, CLOUD_HEIGHT - currentHeight - GAP, BAR_WIDTH, currentHeight);
+    ctx.fillRect(CLOUD_X + BAR_MARGIN + (BAR_WIDTH + BAR_MARGIN) * i, CLOUD_HEIGHT - currentHeight - GAP * 1.5, BAR_WIDTH, currentHeight);
     ctx.fillStyle = '#000';
-    ctx.fillText(Math.floor(times[i]), CLOUD_X + BAR_MARGIN + (BAR_WIDTH + BAR_MARGIN) * i, CLOUD_HEIGHT - currentHeight - GAP * 2);
+    ctx.fillText(Math.floor(times[i]), CLOUD_X + BAR_MARGIN + (BAR_WIDTH + BAR_MARGIN) * i, CLOUD_HEIGHT - currentHeight - GAP * 2.5);
   }
 };
