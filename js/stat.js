@@ -26,22 +26,8 @@ var renderCloud = function (ctx, x, y, color) {
  * @param {array} arr массив чисел c результатами прохождения игры
  * @return {number} максимальный результат
  */
-// var getMaxElement = function (arr) {
-//   var maxElement = arr[0];
-
-//   for (var i = 1; i < arr.length; i++) {
-//     if (arr[i] > maxElement) {
-//       maxElement = arr[i];
-//     }
-//   }
-//   return maxElement;
-// };
-/**
- *
- * @param {Array} arr
- */
 var getMaxElement = function (arr) {
-  return Math.max.apply(null, arr)
+  return Math.max.apply(null, arr);
 };
 
 /**
@@ -52,6 +38,7 @@ var getMaxElement = function (arr) {
  */
 window.renderStatistics = function (ctx, names, times) {
   var maxTime = getMaxElement(times);
+
   /**
    * @return {string} получаем синий цвет с разной насыщенностью
    */
