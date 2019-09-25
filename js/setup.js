@@ -82,7 +82,7 @@ var onSetupUserNameInputEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
     evt.stopPropagation();
   }
-}
+};
 
 /**
  * @description - Показывает попап и добавляет обработчик события на нажатие Esc
