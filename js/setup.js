@@ -4,7 +4,7 @@ var NUMBER_OF_SIMILAR_WIZARDS = 4;
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
 var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-var WIZARD_SURENAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
+var WIZARD_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
@@ -21,7 +21,6 @@ var similarListElement = document.querySelector('.setup-similar-list');
 var fragment = document.createDocumentFragment();
 var setupPlayer = document.querySelector('.setup-player');
 
-setup.classList.remove('hidden');
 document.querySelector('.setup-similar').classList.remove('hidden');
 
 /**
@@ -37,7 +36,7 @@ var getRandomElem = function (arr) {
  */
 var createWizard = function () {
   var wizard = {
-    name: getRandomElem(WIZARD_NAMES) + ' ' + getRandomElem(WIZARD_SURENAMES),
+    name: getRandomElem(WIZARD_NAMES) + ' ' + getRandomElem(WIZARD_SURNAMES),
     coatColor: getRandomElem(COAT_COLORS),
     eyesColor: getRandomElem(EYES_COLORS)
   };
@@ -49,9 +48,10 @@ var createWizard = function () {
  */
 var renderWizard = function () {
   var wizardElement = similarWizardTemplate.cloneNode(true);
-  wizardElement.querySelector('.setup-similar-label').textContent = createWizard().name;
-  wizardElement.querySelector('.wizard-coat').style.fill = createWizard().coatColor;
-  wizardElement.querySelector('.wizard-eyes').style.fill = createWizard().eyesColor;
+  var wizardData = createWizard();
+  wizardElement.querySelector('.setup-similar-label').textContent = wizardData.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizardData.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizardData.eyesColor;
 
   return wizardElement;
 };
@@ -62,25 +62,13 @@ for (var i = 0; i < NUMBER_OF_SIMILAR_WIZARDS; i++) {
 
 similarListElement.appendChild(fragment);
 
-setup.querySelector('.setup-similar').classList.remove('hidden');
-
 /**
  * @description - Закрывает попап по нажатию Esc
- * @param {Object} evt - Объект event
+ * @param {Event} evt - Объект event
  */
 var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
     closePopup();
-  }
-};
-
-/**
- * @description - // Останавливает "всплытие", если фокус на поле ввода имени волшебника
- * @param {Object} evt - Объект event
- */
-var onSetupUserNameInputEscPress = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE) {
-    evt.stopPropagation();
   }
 };
 
@@ -102,7 +90,6 @@ var closePopup = function () {
 
 setupOpen.addEventListener('click', function () {
   openPopup();
-  document.removeEventListener('keydown', onSetupUserNameInputEscPress);
 });
 
 setupOpen.addEventListener('keydown', function (evt) {
@@ -122,7 +109,13 @@ setupClose.addEventListener('keydown', function (evt) {
 });
 
 // Добавляет обработчик события, при котором не произойдет закрытие попапа по нажатию на Esc, если фокус - на поле ввода имени волшебника
-setupUserNameInput.addEventListener('keydown', onSetupUserNameInputEscPress);
+setupUserNameInput.addEventListener('focus', function () {
+  document.removeEventListener('keydown', onPopupEscPress);
+});
+
+setupUserNameInput.addEventListener('blur', function () {
+  document.addEventListener('keydown', onPopupEscPress);
+});
 
 wizardCoat.addEventListener('click', function () {
   var wizardCoatColor = getRandomElem(COAT_COLORS);
