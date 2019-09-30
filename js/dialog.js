@@ -5,7 +5,11 @@
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
   var setupUserNameInput = setup.querySelector('.setup-user-name'); // Поле ввода имени волшебника.
-  var setupHandle = setup.querySelector('.upload');
+  var setupUpload = setup.querySelector('.upload');
+  var DIALOG_CENTER = {
+    top: 80 + 'px',
+    left: 50 + '%',
+  };
 
   /**
    * @description - Закрывает попап по нажатию Esc
@@ -20,6 +24,8 @@
    */
   var openPopup = function () {
     setup.classList.remove('hidden');
+    setup.style.top = DIALOG_CENTER.top;
+    setup.style.left = DIALOG_CENTER.left;
     document.addEventListener('keydown', onPopupEscPress);
   };
 
@@ -56,7 +62,7 @@
     document.addEventListener('keydown', onPopupEscPress);
   });
 
-  setupHandle.addEventListener('mousedown', function (evt) {
+  setupUpload.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
     var startCoords = {
@@ -92,10 +98,10 @@
       if (dragged) {
         var onClickPreventDefault = function (e) {
           e.preventDefault();
-          setupHandle.removeEventListener('click', onClickPreventDefault);
+          setupUpload.removeEventListener('click', onClickPreventDefault);
         };
 
-        setupHandle.addEventListener('click', onClickPreventDefault);
+        setupUpload.addEventListener('click', onClickPreventDefault);
       }
     };
 
@@ -103,4 +109,3 @@
     document.addEventListener('mouseup', onMoseUp);
   });
 })();
-
