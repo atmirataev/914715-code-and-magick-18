@@ -1,11 +1,11 @@
 'use strict';
 
 (function () {
-  var GET_URL = 'https://js.dump.academy/code-and-magick/dat';
-  var POST_URL = 'https://js.dump.academy/code-and-magik/';
+  var GET_URL = 'https://js.dump.academy/code-and-magick/data';
+  var POST_URL = 'https://js.dump.academy/code-and-magick/';
 
   /**
-   *Функия, получающая данные с сервера
+   * Функия, получающая данные с сервера
    * @param {Function} onLoad - Callback, который срабатыает при успешном выполнении запроса
    * @param {Function} onError - Callback, который не срабатыает при успешном выполнении запроса
    */
@@ -27,7 +27,7 @@
   };
 
   /**
-   *Функция, отправляющая данные на сервер
+   * Функция, отправляющая данные на сервер
    * @param {Object} data - Oбъект FormData, который содержит данные формы, которые будут отправлены на сервер
    * @param {Function} onLoad - Callback, который срабатыает при успешном выполнении запроса
    * @param {Function} onError - Callback, который не срабатыает при успешном выполнении запроса

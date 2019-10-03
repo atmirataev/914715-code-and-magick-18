@@ -59,17 +59,17 @@
   }
 
   /**
-   *Показывает сообщение об ошибке
+   * Показывает сообщение об ошибке
    * @param {Any} errorMessage - Текст сообщения об ошибке
    */
   var errorHandler = function (errorMessage) {
     errorNode.style.display = 'block';
     errorNode.textContent = errorMessage;
-
-    document.addEventListener('click', function () {
-      errorNode.style.display = 'none';
-    });
   };
+
+  document.addEventListener('click', function () {
+    errorNode.style.display = 'none';
+  });
 
   /**
    * Закрывает форму отправки данных на сервер
