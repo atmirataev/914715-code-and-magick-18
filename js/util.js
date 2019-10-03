@@ -24,9 +24,18 @@
     return arr[Math.floor(Math.random() * arr.length)];
   };
 
+  /**
+   * @param {Array} arr - Массив данных
+   * @return {number} - Случайный индекс
+   */
+  var getRandomIndex = function (arr) {
+    return Math.floor(Math.random() * arr.length);
+  };
+
   window.util = {
     isEscEvent: isEscEvent,
     isEnterEvent: isEnterEvent,
     getRandomElem: getRandomElem,
+    getRandomIndex: getRandomIndex,
   };
 })();
