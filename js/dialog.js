@@ -27,6 +27,7 @@
     setup.style.top = DIALOG_CENTER.top;
     setup.style.left = DIALOG_CENTER.left;
     document.addEventListener('keydown', onPopupEscPress);
+    window.backend.load(window.setup.succesGettingHandler, window.setup.errorHandler);
   };
 
   /**

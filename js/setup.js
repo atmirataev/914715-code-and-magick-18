@@ -9,6 +9,8 @@
   var fragment = document.createDocumentFragment();
   var setupPlayer = document.querySelector('.setup-player');
   var form = window.dialog.setup.querySelector('.setup-wizard-form');
+  var errorNode = createErrorNode();
+  var wizardLoaded = false;
 
   /**
    * @param {Any} wizard - Oбъект со структурой волшебника
@@ -28,31 +30,45 @@
    * @param {Any} wizards - Полученный с сервера массив объектов с данными о волшебниках
    */
   var succesGettingHandler = function (wizards) {
-    for (var i = 0; i < window.data.NUMBER_OF_SIMILAR_WIZARDS; i++) {
-      var randomIndex = window.util.getRandomIndex(wizards);
-      var randomWizard = wizards[randomIndex];
-      wizards.splice(randomIndex, 1);
-      fragment.appendChild(renderWizard(randomWizard));
+    if (!wizardLoaded) {
+      for (var i = 0; i < window.data.NUMBER_OF_SIMILAR_WIZARDS; i++) {
+        var randomIndex = window.util.getRandomIndex(wizards);
+        var randomWizard = wizards[randomIndex];
+        wizards.splice(randomIndex, 1);
+        fragment.appendChild(renderWizard(randomWizard));
+      }
     }
-
+    wizardLoaded = true;
     similarListElement.appendChild(fragment);
     window.dialog.setup.querySelector('.setup-similar').classList.remove('hidden');
   };
 
   /**
-   *Отрисовывает на странице сообщение об ошибке
-   * @param {Any} errorMessage - Текст сообщения об ошибке
+   * @return {HTMLElement} - DOM-элемент сообщения об ошибке
    */
-  var errorHandler = function (errorMessage) {
+  function createErrorNode() {
     var node = document.createElement('div');
-    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    node.style.position = 'absolute';
+    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red; display: none;';
+    node.style.position = 'fixed';
     node.style.left = 0;
     node.style.right = 0;
     node.style.fontSize = '30px';
-
-    node.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', node);
+
+    return node;
+  }
+
+  /**
+   *Показывает сообщение об ошибке
+   * @param {Any} errorMessage - Текст сообщения об ошибке
+   */
+  var errorHandler = function (errorMessage) {
+    errorNode.style.display = 'block';
+    errorNode.textContent = errorMessage;
+
+    document.addEventListener('click', function () {
+      errorNode.style.display = 'none';
+    });
   };
 
   /**
@@ -85,5 +101,8 @@
     setupFireballWrap.querySelector('input[name="fireball-color"]').value = fireballColor;
   });
 
-  window.backend.load(succesGettingHandler, errorHandler);
+  window.setup = {
+    succesGettingHandler: succesGettingHandler,
+    errorHandler: errorHandler,
+  };
 })();

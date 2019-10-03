@@ -1,7 +1,8 @@
 'use strict';
 
 (function () {
-  var URL = 'https://js.dump.academy/code-and-magick/data';
+  var GET_URL = 'https://js.dump.academy/code-and-magick/dat';
+  var POST_URL = 'https://js.dump.academy/code-and-magik/';
 
   /**
    *Функия, получающая данные с сервера
@@ -21,12 +22,12 @@
     xhr.addEventListener('error', function () {
       onError('Произошла ошибка соединения');
     });
-    xhr.open('GET', URL);
+    xhr.open('GET', GET_URL);
     xhr.send();
   };
 
   /**
-   *A
+   *Функция, отправляющая данные на сервер
    * @param {Object} data - Oбъект FormData, который содержит данные формы, которые будут отправлены на сервер
    * @param {Function} onLoad - Callback, который срабатыает при успешном выполнении запроса
    * @param {Function} onError - Callback, который не срабатыает при успешном выполнении запроса
@@ -44,7 +45,7 @@
     xhr.addEventListener('error', function () {
       onError('Произошла ошибка соединения');
     });
-    xhr.open('POST', URL);
+    xhr.open('POST', POST_URL);
     xhr.send(data);
   };
 
