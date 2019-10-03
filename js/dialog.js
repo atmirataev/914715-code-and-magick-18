@@ -53,7 +53,6 @@
     window.util.isEnterEvent(evt, closePopup);
   });
 
-  // Добавляет обработчик события, при котором не произойдет закрытие попапа по нажатию на Esc, если фокус - на поле ввода имени волшебника
   setupUserNameInput.addEventListener('focus', function () {
     document.removeEventListener('keydown', onPopupEscPress);
   });
@@ -108,4 +107,8 @@
     document.addEventListener('mousemove', onMoseMove);
     document.addEventListener('mouseup', onMoseUp);
   });
+
+  window.dialog = {
+    setup: setup,
+  };
 })();
